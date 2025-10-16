@@ -9,16 +9,117 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            BackgroundView(topColor: .blue, bottomColor: Color("lightBlue"))
+            
+            VStack{
+                
+                CityTextView(cityName: "EL Mourouj, TN")
+                
+                MainWeatherStatusView(imageName: "cloud.sun.fill", temperature: 27)
+                
+                HStack(spacing: 20){
+                    WeatherDayView(dayOfWeek: "TUE",
+                                   imageName: "cloud.sun.fill",
+                                   temperature: 25)
+                    
+                    WeatherDayView(dayOfWeek: "WED",
+                                   imageName: "sun.max.fill",
+                                   temperature: 25)
+                    
+                    WeatherDayView(dayOfWeek: "THU",
+                                   imageName: "wind.snow",
+                                   temperature: 14)
+                    
+                    WeatherDayView(dayOfWeek: "FRI",
+                                   imageName: "cloud.rain.fill",
+                                   temperature: 16)
+                    
+                    WeatherDayView(dayOfWeek: "SAT",
+                                   imageName: "cloud.heavyrain.fill",
+                                   temperature: 17)
+                }
+                
+                Spacer()
+                
+                Button{
+                    print("Tapped!!")
+                }label: {
+                    WeatherButton(title: "Change Day Time",
+                                  textColor: .blue,
+                                  backgroundColor: .white)
+                }
+                
+                Spacer()
+                    
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+}
+
+struct WeatherDayView: View{
+    var dayOfWeek: String
+    var imageName: String
+    var temperature: Int
+    
+    var body: some View{
+        VStack(spacing:4){
+            Text(dayOfWeek)
+                .font(.system(size: 16, weight: .medium, design: .default))
+                .foregroundStyle(.white)
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+            Text("\(temperature)°")
+                .font(.system(size: 28, weight: .medium))
+                .foregroundStyle(.white)
+        }
+    }
+}
+
+struct BackgroundView: View{
+    var topColor: Color
+    var bottomColor: Color
+    
+    var body: some View{
+        LinearGradient(gradient: Gradient(colors: [topColor, bottomColor]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
+            .ignoresSafeArea(edges: .all)
+    }
+}
+
+struct CityTextView:View {
+    var cityName: String
+    var body: some View {
+        Text(cityName)
+            .font(.system(size: 32, weight: .medium, design: .default))
+            .foregroundStyle(.white)
+            .padding()
+    }
+}
+
+struct MainWeatherStatusView: View {
+    var imageName: String
+    var temperature: Int
+    var body : some View {
+        VStack(spacing: 8){
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 180, height: 180)
+            
+            Text("\(temperature)°")
+                .font(.system(size: 70, weight: .medium))
+                .foregroundStyle(.white)
+        }
+        .padding(.bottom, 40)
+    }
 }
