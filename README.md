@@ -1,13 +1,10 @@
 # Weather App (SwiftUI)
 
-A beautiful, modern weather app built with SwiftUI. Instantly view current weather conditions, temperature, and forecasts for your location or any city worldwide.
+A beautiful, modern weather app built with SwiftUI for learning purpose. It has Static weather data just to practice more on the UI Elements.
 
 ## Features
 
-- 🌤 Real-time weather data
-- 📍 Location-based weather
-- 🔍 Search for any city
-- 🌡 Temperature, humidity, wind speed
+- 🌤 Static Weather data
 - 🎨 Custom weather icons and colors
 - 🕶 Light & dark mode support
 
